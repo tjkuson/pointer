@@ -1,0 +1,54 @@
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+h1,
+h2,
+p {
+	text-align: center;
+}
+
+.content-container {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+ul {
+	text-align: left;
+	margin-left: 1em;
+	padding-left: 1em;
+}
+
+.scale-container {
+	text-align: left;
+}
+
+.scale-selection {
+	text-align: center;
+}
+
+.scale-selection label {
+	margin-right: 0.5em;
+}
+
+.scale-selection select {
+	font-size: 1em;
+}
+
+.description-container {
+	text-align: left;
+	margin: 0 auto;
+	max-width: 800px;
+}
+
+.button-container {
+	text-align: center;
+}
+
+.footer {
+	margin-top: 20px;
+	padding: 10px;
+	text-align: center;
+}
