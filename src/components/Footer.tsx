@@ -2,7 +2,7 @@ import type React from "react";
 
 const Footer: React.FC = () => {
 	return (
-		<footer className="footer" id="binary-search">
+		<footer className="footer">
 			<p>
 				Credit to the Panama WUDC 2025 team (and WUDC and EUDC teams previous)
 				for the scales. View the{" "}
