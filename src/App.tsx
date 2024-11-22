@@ -2,6 +2,8 @@ import "./App.css";
 import BracketDescription from "./components/BracketDescription";
 import Footer from "./components/Footer";
 import ScaleSelection from "./components/ScaleSelection";
+import Score from "./components/Score";
+import ScoreRange from "./components/ScoreRange";
 import ScoreSelection from "./components/ScoreSelection";
 import { useBinarySearch } from "./hooks/useBinarySearch";
 import { isSpeakerBracket } from "./utils";
@@ -116,24 +118,27 @@ function App() {
 					</div>
 				)}
 
-				{phase === "done" &&
-					selectedBracketIndex !== null &&
-					exactScore !== null && (
-						<div>
-							<p>
-								You have selected a score of <strong>{exactScore}</strong>.
-							</p>
-							<BracketDescription
-								description={currentScale[selectedBracketIndex].description}
+				{phase === "done" && selectedBracketIndex !== null && (
+					<div>
+						<p>You have selected a score of...</p>
+						{isSpeakerBracket(currentScale[selectedBracketIndex]) ? (
+							<ScoreRange
+								bracket={currentScale[selectedBracketIndex]}
+								exactScore={exactScore}
 							/>
-							<div className="button-container">
-								<button type="reset" onClick={reset}>
-									Start Over
-								</button>
-							</div>
+						) : (
+							<Score bracket={currentScale[selectedBracketIndex]} />
+						)}
+						<BracketDescription
+							description={currentScale[selectedBracketIndex].description}
+						/>
+						<div className="button-container">
+							<button type="reset" onClick={reset}>
+								Start Over
+							</button>
 						</div>
-					)}
-
+					</div>
+				)}
 				<div>
 					<div className="button-container">
 						<button type="button" onClick={toggleShowScale}>
