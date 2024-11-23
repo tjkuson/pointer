@@ -52,3 +52,23 @@ ul {
 	padding: 10px;
 	text-align: center;
 }
+
+.score-range {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.score-range span {
+	padding: 10px;
+}
+
+.score-range .neighbouring-score {
+	color: var(--decorative-color);
+}
+
+.score-range .selected-score {
+	font-size: 1.5em;
+	font-weight: bold;
+}
