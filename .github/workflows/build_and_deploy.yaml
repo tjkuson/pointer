@@ -1,9 +1,10 @@
-name: Deploy static content to GitHub Pages
+name: Build and Deploy
 
 on:
   push:
     branches:
       - main
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -16,10 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,9 +31,29 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Upload artifact
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./dist"
